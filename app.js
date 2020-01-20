@@ -15,7 +15,7 @@ function render() {
     let tbody = document.getElementById("body");
     let tr = document.createElement("tr");
     for (let book in myLibrary) {
-    
+
         cell1 = document.createElement("td");
         node1 = document.createTextNode(myLibrary[book].title);
         cell2 = document.createElement("td");
@@ -35,6 +35,22 @@ function render() {
         tbody.appendChild(tr);
     }
 }
+
+function showModal() {
+  document.getElementById("form-modal").classList.add("is-active");
+}
+function closeModal() {
+  document.getElementById("form-modal").classList.remove("is-active");
+}
+
+window.addEventListener('click', function(e){
+  let modal = document.querySelector('#form-modal .box');
+  if (!modal.contains(e.target)  && e.target.id != "addBook"){
+    closeModal();
+  }
+});
+
+document.getElementById("addBook").addEventListener("click", showModal);
 
 book = new Book("test", "hello", "blha", "1");
 
