@@ -8,7 +8,7 @@ function Book(title, author, pages, status) {
 }
 
 function addBookToLibrary(book) {
-  return myLibrary.push(book);
+    return myLibrary.push(book);
 }
 
 function render() {
@@ -33,6 +33,12 @@ function render() {
         tr.appendChild(cell3);
         tr.appendChild(cell4);
         tbody.appendChild(tr);
+        let tdRemoveButton = document.createElement("td");
+        tr.appendChild(tdRemoveButton);
+        let removeButton = document.createElement("button");
+        removeButton.textContent = "X";
+        removeButton.classList.add("removeButton", "delete", "is-vcentered")
+        tdRemoveButton.appendChild(removeButton);
     }
 }
 
@@ -40,7 +46,7 @@ function showModal() {
   document.getElementById("form-modal").classList.add("is-active");
 }
 function closeModal() {
-  document.getElementById("form-modal").classList.remove("is-active");
+    document.getElementById("form-modal").classList.remove("is-active");
 }
 
 window.addEventListener('click', function(e){
@@ -51,6 +57,9 @@ window.addEventListener('click', function(e){
 });
 
 document.getElementById("addBook").addEventListener("click", showModal);
+document.querySelector(".button.cancel").addEventListener("click", closeModal);
+document.querySelector(".modal-close.is-large").addEventListener("click", closeModal);
+
 
 book = new Book("test", "hello", "blha", "1");
 
