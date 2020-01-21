@@ -16,6 +16,7 @@ function addBookToLibrary(book) {
 }
 
 function render() {
+  localStorage.setItem('myLibrary',  JSON.stringify(myLibrary));
   let tbody = document.getElementById("body");
   tbody.innerHTML = "";
   for (let book in myLibrary) {
@@ -79,11 +80,12 @@ function cleanForm() {
 }
 
 function removeBook(e) {
-  myLibrary.splice(parseInt(e.target.parentElement.parentElement.dataset.id));
+  myLibrary.splice(parseInt(e.target.parentElement.parentElement.dataset.id), 1);
   render();
 }
 
 function changeStatus(e) {
+  console.log(e.target.parentElement.parentElement.dataset.id);
   myLibrary[parseInt(e.target.parentElement.parentElement.dataset.id)].toggle();
   render();
 }
@@ -108,5 +110,14 @@ document
 book = new Book("test", "hello", "blha", true);
 
 addBookToLibrary(book);
+
+if (localStorage.getItem("myLibrary") !== null) {
+  myLibraryLocal = JSON.parse(localStorage.getItem('myLibrary'));
+  myLibrary = [];
+  myLibraryLocal.forEach((item, i) => {
+    myLibrary.push(new Book(item.title, item.author, item.pages, item.status));
+  });
+
+}
 
 render();
