@@ -16,21 +16,23 @@ function addBookToLibrary(book) {
 }
 
 function render() {
-  localStorage.setItem('myLibrary',  JSON.stringify(myLibrary));
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   let tbody = document.getElementById("body");
   tbody.innerHTML = "";
   for (let book in myLibrary) {
     let tr = document.createElement("tr");
-    cell1 = document.createElement("td");
-    node1 = document.createTextNode(myLibrary[book].title);
-    cell2 = document.createElement("td");
-    node2 = document.createTextNode(myLibrary[book].author);
-    cell3 = document.createElement("td");
-    node3 = document.createTextNode(myLibrary[book].pages);
-    cell4 = document.createElement("td");
-    node4 = document.createTextNode(myLibrary[book].status ? "Read" : "Unread");
+    let cell1 = document.createElement("td");
+    let node1 = document.createTextNode(myLibrary[book].title);
+    let cell2 = document.createElement("td");
+    let node2 = document.createTextNode(myLibrary[book].author);
+    let cell3 = document.createElement("td");
+    let node3 = document.createTextNode(myLibrary[book].pages);
+    let cell4 = document.createElement("td");
+    let node4 = document.createTextNode(
+      myLibrary[book].status ? "Read" : "Unread"
+    );
     let readButton = document.createElement("button");
-    readButton.classList.add("changeStatus", "button", "is-dark");
+    readButton.classList.add('changeStatus', 'button', 'is-dark');
     cell1.appendChild(node1);
     cell2.appendChild(node2);
     cell3.appendChild(node3);
@@ -47,7 +49,7 @@ function render() {
     tr.appendChild(tdRemoveButton);
     let removeButton = document.createElement("button");
     removeButton.textContent = "X";
-    removeButton.classList.add("removeButton", "delete", "is-vcentered");
+    removeButton.classList.add('removeButton', 'delete', 'is-vcentered');
     tdRemoveButton.appendChild(removeButton);
   }
 }
@@ -80,7 +82,10 @@ function cleanForm() {
 }
 
 function removeBook(e) {
-  myLibrary.splice(parseInt(e.target.parentElement.parentElement.dataset.id), 1);
+  myLibrary.splice(
+    parseInt(e.target.parentElement.parentElement.dataset.id),
+    1
+  );
   render();
 }
 
@@ -112,12 +117,11 @@ book = new Book("test", "hello", "blha", true);
 addBookToLibrary(book);
 
 if (localStorage.getItem("myLibrary") !== null) {
-  myLibraryLocal = JSON.parse(localStorage.getItem('myLibrary'));
+  myLibraryLocal = JSON.parse(localStorage.getItem("myLibrary"));
   myLibrary = [];
   myLibraryLocal.forEach((item, i) => {
     myLibrary.push(new Book(item.title, item.author, item.pages, item.status));
   });
-
 }
 
 render();
