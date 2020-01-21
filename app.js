@@ -7,6 +7,10 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
+Book.prototype.toggle = function(){
+  this.status = !this.status;
+};
+
 function addBookToLibrary(book) {
   return myLibrary.push(book);
 }
@@ -23,7 +27,7 @@ function render() {
     cell3 = document.createElement("td");
     node3 = document.createTextNode(myLibrary[book].pages);
     cell4 = document.createElement("td");
-    node4 = document.createTextNode(myLibrary[book].status);
+    node4 = document.createTextNode(myLibrary[book].status?"Read":"Unread");
     cell1.appendChild(node1);
     cell2.appendChild(node2);
     cell3.appendChild(node3);
@@ -55,7 +59,7 @@ function addBook(){
   let title = document.querySelector("#title").value;
   let author = document.querySelector("#author").value;
   let pages = document.querySelector("#pages").value;
-  let status = document.querySelector("#status").value;
+  let status = document.querySelector("#status").value == "true"? true : false;
   let book = new Book(title, author, pages, status);
   myLibrary.push(book);
   render();
@@ -90,7 +94,7 @@ document
   .querySelector(".modal-close.is-large")
   .addEventListener("click", closeModal);
 
-book = new Book("test", "hello", "blha", "1");
+book = new Book("test", "hello", "blha", true);
 
 addBookToLibrary(book);
 
