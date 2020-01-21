@@ -20,15 +20,15 @@ function render() {
   let tbody = document.getElementById("body");
   tbody.innerHTML = "";
   for (let book in myLibrary) {
-    let tr = document.createElement("tr");
-    let cell1 = document.createElement("td");
-    let node1 = document.createTextNode(myLibrary[book].title);
-    let cell2 = document.createElement("td");
-    let node2 = document.createTextNode(myLibrary[book].author);
-    let cell3 = document.createElement("td");
-    let node3 = document.createTextNode(myLibrary[book].pages);
-    let cell4 = document.createElement("td");
-    let node4 = document.createTextNode(
+    const tr = document.createElement("tr");
+    const cell1 = document.createElement("td");
+    const node1 = document.createTextNode(myLibrary[book].title);
+    const cell2 = document.createElement("td");
+    const node2 = document.createTextNode(myLibrary[book].author);
+    const cell3 = document.createElement("td");
+    const node3 = document.createTextNode(myLibrary[book].pages);
+    const cell4 = document.createElement("td");
+    const node4 = document.createTextNode(
       myLibrary[book].status ? "Read" : "Unread"
     );
     let readButton = document.createElement("button");
