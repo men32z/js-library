@@ -7,7 +7,7 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-Book.prototype.toggle = function() {
+Book.prototype.toggle = function () {
   this.status = !this.status;
 };
 
@@ -16,22 +16,22 @@ function addBookToLibrary(book) {
 }
 
 function render() {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-  let tbody = document.getElementById("body");
-  tbody.innerHTML = "";
-  for (let book in myLibrary) {
-    const tr = document.createElement("tr");
-    const cell1 = document.createElement("td");
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  const tbody = document.getElementById('body');
+  tbody.innerHTML = '';
+  for (const book in myLibrary) {
+    const tr = document.createElement('tr');
+    const cell1 = document.createElement('td');
     const node1 = document.createTextNode(myLibrary[book].title);
-    const cell2 = document.createElement("td");
+    const cell2 = document.createElement('td');
     const node2 = document.createTextNode(myLibrary[book].author);
-    const cell3 = document.createElement("td");
+    const cell3 = document.createElement('td');
     const node3 = document.createTextNode(myLibrary[book].pages);
-    const cell4 = document.createElement("td");
+    const cell4 = document.createElement('td');
     const node4 = document.createTextNode(
-      myLibrary[book].status ? "Read" : "Unread"
+      myLibrary[book].status ? 'Read' : 'Unread'
     );
-    let readButton = document.createElement("button");
+    const readButton = document.createElement('button');
     readButton.classList.add('changeStatus', 'button', 'is-dark');
     cell1.appendChild(node1);
     cell2.appendChild(node2);
@@ -45,29 +45,29 @@ function render() {
     tr.appendChild(cell4);
     tr.dataset.id = book;
     tbody.appendChild(tr);
-    let tdRemoveButton = document.createElement("td");
+    const tdRemoveButton = document.createElement('td');
     tr.appendChild(tdRemoveButton);
-    let removeButton = document.createElement("button");
-    removeButton.textContent = "X";
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'X';
     removeButton.classList.add('removeButton', 'delete', 'is-vcentered');
     tdRemoveButton.appendChild(removeButton);
   }
 }
 
 function showModal() {
-  document.getElementById("form-modal").classList.add("is-active");
+  document.getElementById('form-modal').classList.add('is-active');
 }
 
 function closeModal() {
-  document.getElementById("form-modal").classList.remove("is-active");
+  document.getElementById('form-modal').classList.remove('is-active');
 }
 
 function addBook() {
-  let title = document.querySelector("#title").value;
-  let author = document.querySelector("#author").value;
-  let pages = document.querySelector("#pages").value;
-  let status = document.querySelector("#status").value == "true" ? true : false;
-  let book = new Book(title, author, pages, status);
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = document.querySelector('#pages').value;
+  const status = document.querySelector('#status').value == 'true' ? true : false;
+  const book = new Book(title, author, pages, status);
   myLibrary.push(book);
   render();
   cleanForm();
@@ -75,9 +75,9 @@ function addBook() {
 }
 
 function cleanForm() {
-  let fields = ["title", "author", "pages", "status"];
+  const fields = ['title', 'author', 'pages', 'status'];
   fields.forEach((item, i) => {
-    document.querySelector("#" + item).value = "";
+    document.querySelector('#' + item).value = '';
   });
 }
 
@@ -95,12 +95,12 @@ function changeStatus(e) {
   render();
 }
 
-document.addEventListener("click", function(e) {
-  let modal = document.querySelector("#form-modal .box");
-  if (e.target.classList.contains("removeButton")) removeBook(e);
-  if (e.target.classList.contains("changeStatus")) changeStatus(e);
+document.addEventListener('click', function(e) {
+  const modal = document.querySelector('#form-modal .box');
+  if (e.target.classList.contains('removeButton')) removeBook(e);
+  if (e.target.classList.contains('changeStatus')) changeStatus(e);
 
-  if (!modal.contains(e.target) && e.target.id != "addBook") {
+  if (!modal.contains(e.target) && e.target.id != 'addBook') {
     closeModal();
   }
 });
