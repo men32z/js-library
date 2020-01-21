@@ -14,8 +14,8 @@ function addBookToLibrary(book) {
 function render() {
   let tbody = document.getElementById("body");
   tbody.innerHTML = "";
-  let tr = document.createElement("tr");
   for (let book in myLibrary) {
+    let tr = document.createElement("tr");
     cell1 = document.createElement("td");
     node1 = document.createTextNode(myLibrary[book].title);
     cell2 = document.createElement("td");
@@ -50,6 +50,26 @@ function closeModal() {
   document.getElementById("form-modal").classList.remove("is-active");
 }
 
+
+function addBook(){
+  let title = document.querySelector("#title").value;
+  let author = document.querySelector("#author").value;
+  let pages = document.querySelector("#pages").value;
+  let status = document.querySelector("#status").value;
+  let book = new Book(title, author, pages, status);
+  myLibrary.push(book);
+  render();
+  cleanForm();
+  closeModal();
+}
+
+function cleanForm(){
+  let fields = ['title', 'author', 'pages', 'status'];
+  fields.forEach((item, i) => {
+    document.querySelector("#"+item).value = "";
+  });
+}
+
 function removeBook(e) {
   myLibrary.splice(parseInt(e.target.dataset.id));
   render();
@@ -64,6 +84,7 @@ document.addEventListener("click", function(e) {
 });
 
 document.getElementById("addBook").addEventListener("click", showModal);
+document.getElementById("addItem").addEventListener("click", addBook);
 document.querySelector(".button.cancel").addEventListener("click", closeModal);
 document
   .querySelector(".modal-close.is-large")
