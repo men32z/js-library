@@ -7,7 +7,7 @@ function Book(title, author, pages, status) {
   this.status = status;
 }
 
-Book.prototype.toggle = function(){
+Book.prototype.toggle = function() {
   this.status = !this.status;
 };
 
@@ -27,20 +27,24 @@ function render() {
     cell3 = document.createElement("td");
     node3 = document.createTextNode(myLibrary[book].pages);
     cell4 = document.createElement("td");
-    node4 = document.createTextNode(myLibrary[book].status?"Read":"Unread");
+    node4 = document.createTextNode(myLibrary[book].status ? "Read" : "Unread");
+    let readButton = document.createElement("button");
+    readButton.classList.add("changeStatus", "button", "is-dark");
     cell1.appendChild(node1);
     cell2.appendChild(node2);
     cell3.appendChild(node3);
     cell4.appendChild(node4);
+    cell4.appendChild(readButton);
+    readButton.appendChild(node4);
     tr.appendChild(cell1);
     tr.appendChild(cell2);
     tr.appendChild(cell3);
     tr.appendChild(cell4);
+    tr.dataset.id = book;
     tbody.appendChild(tr);
     let tdRemoveButton = document.createElement("td");
     tr.appendChild(tdRemoveButton);
     let removeButton = document.createElement("button");
-    removeButton.dataset.id = book;
     removeButton.textContent = "X";
     removeButton.classList.add("removeButton", "delete", "is-vcentered");
     tdRemoveButton.appendChild(removeButton);
@@ -50,16 +54,16 @@ function render() {
 function showModal() {
   document.getElementById("form-modal").classList.add("is-active");
 }
+
 function closeModal() {
   document.getElementById("form-modal").classList.remove("is-active");
 }
 
-
-function addBook(){
+function addBook() {
   let title = document.querySelector("#title").value;
   let author = document.querySelector("#author").value;
   let pages = document.querySelector("#pages").value;
-  let status = document.querySelector("#status").value == "true"? true : false;
+  let status = document.querySelector("#status").value == "true" ? true : false;
   let book = new Book(title, author, pages, status);
   myLibrary.push(book);
   render();
@@ -67,21 +71,28 @@ function addBook(){
   closeModal();
 }
 
-function cleanForm(){
-  let fields = ['title', 'author', 'pages', 'status'];
+function cleanForm() {
+  let fields = ["title", "author", "pages", "status"];
   fields.forEach((item, i) => {
-    document.querySelector("#"+item).value = "";
+    document.querySelector("#" + item).value = "";
   });
 }
 
 function removeBook(e) {
-  myLibrary.splice(parseInt(e.target.dataset.id));
+  myLibrary.splice(parseInt(e.target.parentElement.parentElement.dataset.id));
+  render();
+}
+
+function changeStatus(e) {
+  myLibrary[parseInt(e.target.parentElement.parentElement.dataset.id)].toggle();
   render();
 }
 
 document.addEventListener("click", function(e) {
   let modal = document.querySelector("#form-modal .box");
   if (e.target.classList.contains("removeButton")) removeBook(e);
+  if (e.target.classList.contains("changeStatus")) changeStatus(e);
+
   if (!modal.contains(e.target) && e.target.id != "addBook") {
     closeModal();
   }
