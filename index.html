@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Library</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="hero is-dark is-bold">
+        <div class="hero-body">
+        <div class="container is-fluid">
+            <h1 class="title is-2">Luis and Christian Library </h1>
+            <h2 class="subtitle">Your awesome books shelf</h2>
+        </div>
+        </div>
+    </div>
+<div class="container is-fluid">
+    <!-- Table -->
+    <section class="section">
+        <div class="container">
+        <h2 class="title">Books</h2>
+            <table class="table is-striped">
+            <thead>
+                <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Status</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody id="body">
+            </tbody>
+            </table>
+            <button class="button is-normal is-dark" id="addBook">Add New Book</button>
+        </div>
+    </section>
+
+    <div class="modal" id="form-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+          <h2 class="title is-3">Add New Book</h2>
+          <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+              <input class="input" placeholder="Book Title" type="text" id="title" name="title" required/>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Author</label>
+            <div class="control">
+              <input class="input" placeholder="Author" type="text" id="author" name="author" required/>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Number of Pages</label>
+            <div class="control">
+              <input class="input" placeholder="Pages" type="number" id="pages" name="pages" required/>
+            </div>
+          </div>
+        <div class="field">
+          <label class="label">Read Status</label>
+          <div class="control">
+            <div class="select">
+              <select name="status" id="status">
+                <option value="true">Read</option>
+                <option value="false">Unread</option>
+              </select>
+            </div>
+          </div>
+          <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-dark" id="addItem">Add Book</button>
+          </div>
+          <div class="control">
+            <button class="button cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
